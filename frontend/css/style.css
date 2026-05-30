@@ -95,6 +95,41 @@ button[type="button"] {
   font-size: 0.95rem;
 }
 
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.password-wrapper input {
+  margin-top: 0;
+  padding-right: 56px;
+  flex: 1;
+}
+
+.password-wrapper .toggle-pw {
+  position: absolute;
+  right: 12px;
+  width: auto;
+  padding: 0;
+  background: transparent;
+  color: #6b7280;
+  font-size: 0.8rem;
+  border: none;
+}
+
+.password-wrapper .toggle-pw:hover {
+  background: transparent;
+  color: #1f2937;
+}
+
+.forgot-link {
+  margin: 12px 0 0;
+  text-align: right;
+  font-size: 0.875rem;
+}
+
 .feed-header {
   display: flex;
   justify-content: space-between;

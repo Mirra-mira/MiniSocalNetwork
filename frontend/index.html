@@ -12,6 +12,7 @@
       <h1>Mini Social</h1>
       <p id="toggle-text">Bạn chưa có tài khoản? <button id="toggle-button" type="button">Đăng ký</button></p>
 
+      <!-- Panel đăng nhập -->
       <div id="login-panel" class="form-panel active">
         <h2>Đăng nhập</h2>
         <form id="login-form">
@@ -21,12 +22,17 @@
           </label>
           <label>
             Mật khẩu
-            <input type="password" name="password" required minlength="6" />
+            <div class="password-wrapper">
+              <input type="password" name="password" required minlength="6" />
+              <button type="button" class="toggle-pw">Hiện</button>
+            </div>
           </label>
           <button type="submit">Đăng nhập</button>
         </form>
+        <p class="forgot-link"><button type="button" id="forgot-button">Quên mật khẩu?</button></p>
       </div>
 
+      <!-- Panel đăng ký -->
       <div id="register-panel" class="form-panel">
         <h2>Đăng ký</h2>
         <form id="register-form">
@@ -36,10 +42,40 @@
           </label>
           <label>
             Mật khẩu
-            <input type="password" name="password" required minlength="6" />
+            <div class="password-wrapper">
+              <input type="password" name="password" required minlength="6" />
+              <button type="button" class="toggle-pw">Hiện</button>
+            </div>
           </label>
           <button type="submit">Đăng ký</button>
         </form>
+      </div>
+
+      <!-- Panel quên mật khẩu -->
+      <div id="forgot-panel" class="form-panel">
+        <h2>Đặt lại mật khẩu</h2>
+        <form id="forgot-form">
+          <label>
+            Tên đăng nhập
+            <input type="text" name="username" required minlength="3" />
+          </label>
+          <label>
+            Mật khẩu mới
+            <div class="password-wrapper">
+              <input type="password" name="new_password" required minlength="6" />
+              <button type="button" class="toggle-pw">Hiện</button>
+            </div>
+          </label>
+          <label>
+            Xác nhận mật khẩu
+            <div class="password-wrapper">
+              <input type="password" name="confirm_password" required minlength="6" />
+              <button type="button" class="toggle-pw">Hiện</button>
+            </div>
+          </label>
+          <button type="submit">Đặt lại mật khẩu</button>
+        </form>
+        <p class="forgot-link"><button type="button" id="back-to-login">Quay lại đăng nhập</button></p>
       </div>
 
       <div id="message" class="message"></div>

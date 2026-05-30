@@ -22,3 +22,8 @@ class UserRead(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
+
+
+class PasswordReset(BaseModel):
+    username: str
+    new_password: str = Field(..., min_length=6, max_length=128)

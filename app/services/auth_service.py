@@ -1,7 +1,7 @@
 from app.core.exceptions import AppException
 from app.core.security import create_token, hash_password, verify_password
 from app.repositories.user_repo import UserRepository
-from app.schemas.user import Token, UserCreate, UserLogin, UserRead
+from app.schemas.user import PasswordReset, Token, UserCreate, UserLogin, UserRead
 
 
 class AuthService:
@@ -30,3 +30,11 @@ class AuthService:
         if record is None:
             return None
         return UserRead(**record)
+
+    @staticmethod
+    async def reset_password(data: PasswordReset) -> None:
+        user = await UserRepository.get_by_username(data.username)
+        if user is None:
+            raise AppException(status_code=404, detail="Ten dang nhap khong ton tai")
+        password_hash = hash_password(data.new_password)
+        await UserRepository.update_password(data.username, password_hash)

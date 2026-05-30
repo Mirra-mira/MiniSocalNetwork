@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, status
 
 from app.api.deps import get_current_user
 from app.core.responses import standard_response
-from app.schemas.user import Token, UserCreate, UserLogin, UserRead
+from app.schemas.user import PasswordReset, Token, UserCreate, UserLogin, UserRead
 from app.services.auth_service import AuthService
 
 router = APIRouter()
@@ -23,3 +23,9 @@ async def login(credentials: UserLogin):
 @router.get("/me", response_model=dict)
 async def me(current_user: UserRead = Depends(get_current_user)):
     return standard_response(True, current_user.dict(), "Thông tin người dùng hiện tại")
+
+
+@router.post("/reset-password", response_model=dict)
+async def reset_password(data: PasswordReset):
+    await AuthService.reset_password(data)
+    return standard_response(True, {}, "Đặt lại mật khẩu thành công")
