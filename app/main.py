@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from app.api.routers.auth import router as auth_router
+from app.api.routers.posts import router as posts_router
 from app.core.exceptions import register_exception_handlers
 from app.database import connect_db, disconnect_db
 
@@ -17,6 +18,7 @@ app.add_middleware(
 )
 
 app.include_router(auth_router, prefix="/auth", tags=["auth"])
+app.include_router(posts_router)
 
 app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
 
