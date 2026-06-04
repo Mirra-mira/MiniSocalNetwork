@@ -8,26 +8,79 @@
 </head>
 <body>
   <header class="feed-header">
-    <h1>Feed của bạn</h1>
-    <button id="logout-btn">Đăng xuất</button>
+    <h1>Mini Social</h1>
+    <div class="header-right">
+      <a id="current-username" class="username-badge"></a>
+      <button id="logout-btn" type="button">Đăng xuất</button>
+    </div>
   </header>
 
   <main class="feed-page">
-    <section id="feed" class="feed-container">
-      <!-- Người 3 render feed tại đây -->
-    </section>
+    <div class="feed-layout">
+
+      <!-- Left: feed -->
+      <div class="feed-container">
+        <form id="post-form" class="post-compose">
+          <textarea name="content" placeholder="Bạn đang nghĩ gì?" rows="3" required maxlength="500"></textarea>
+          <div class="post-compose-footer">
+            <span class="char-count">0 / 500</span>
+            <button type="submit">Đăng bài</button>
+          </div>
+        </form>
+        <div id="feed"></div>
+      </div>
+
+      <!-- Right: friends sidebar -->
+      <aside class="friends-sidebar">
+        <div class="friends-sidebar-header">
+          <span class="friends-sidebar-title">Bạn bè</span>
+          <div class="friends-header-actions">
+            <button type="button" id="search-friends-btn" class="sidebar-icon-btn" title="Tìm trong danh sách">&#x1F50D;</button>
+            <button type="button" id="add-friend-btn" class="sidebar-icon-btn add-btn" title="Thêm bạn bè">
+              +
+              <span id="request-badge" class="request-badge" style="display:none"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Panel thêm bạn + lời mời -->
+        <div id="add-friend-panel" style="display:none">
+          <div class="add-friend-search-bar">
+            <input id="search-user-input" type="text" placeholder="Nhập username..." autocomplete="off" />
+            <button type="button" id="search-user-btn">Tìm</button>
+          </div>
+          <div id="search-user-results"></div>
+          <div class="requests-divider">Lời mời kết bạn</div>
+          <div id="requests-panel"></div>
+        </div>
+
+        <!-- Lọc bạn bè -->
+        <input id="filter-friends-input" type="text" placeholder="Lọc bạn bè..." class="filter-friends-input" style="display:none" />
+
+        <div id="friends-list" class="friends-list">
+          <p class="friends-empty">Đang tải...</p>
+        </div>
+      </aside>
+
+    </div>
   </main>
 
-  <script>
-    const token = localStorage.getItem('token');
-    if (!token) {
-      window.location.href = 'index.html';
-    }
+  <!-- Chat window -->
+  <div id="chat-window" class="chat-window" style="display:none">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div id="chat-friend-avatar" class="chat-header-avatar"></div>
+        <span id="chat-friend-name"></span>
+      </div>
+      <button type="button" id="chat-close" class="chat-close">✕</button>
+    </div>
+    <div id="chat-messages" class="chat-messages"></div>
+    <form id="chat-form" class="chat-form">
+      <input id="chat-input" type="text" placeholder="Nhắn tin..." autocomplete="off" maxlength="500" />
+      <button type="submit">Gửi</button>
+    </form>
+  </div>
 
-    document.getElementById('logout-btn').addEventListener('click', () => {
-      localStorage.removeItem('token');
-      window.location.href = 'index.html';
-    });
-  </script>
+  <script type="module" src="js/feed.js"></script>
 </body>
 </html>

@@ -43,7 +43,10 @@ class FeedPostRead(BaseModel):
     id: int
     user_id: int
     username: str
+    display_name: Optional[str] = None
+    avatar_url: Optional[str] = None
     content: str
     created_at: datetime
     like_count: int
     comment_count: int
+    user_liked: bool = False
