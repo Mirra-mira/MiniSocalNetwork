@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Social - Trang cá nhân</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="feed-header">
+    <a href="feed.html" class="back-link">← Mini Social</a>
+    <div class="header-right">
+      <a id="current-username" class="username-badge"></a>
+      <button id="logout-btn" type="button">Đăng xuất</button>
+    </div>
+  </header>
+
+  <main class="feed-page">
+    <div class="feed-container">
+
+      <!-- Profile card -->
+      <div class="profile-card" id="profile-card">
+        <div class="profile-avatar-wrap">
+          <img id="profile-avatar" src="" alt="avatar" class="profile-avatar" />
+          <button id="upload-avatar-btn" type="button" class="upload-avatar-btn" style="display:none">Đổi ảnh</button>
+          <input type="file" id="avatar-input" accept="image/*" style="display:none" />
+        </div>
+        <div class="profile-info">
+          <div class="profile-name-row">
+            <span id="profile-display-name" class="profile-display-name"></span>
+            <span id="profile-username-tag" class="profile-username-tag"></span>
+          </div>
+          <div class="profile-stats">
+            <span><strong id="profile-followers">0</strong> người theo dõi</span>
+            <span><strong id="profile-following">0</strong> đang theo dõi</span>
+          </div>
+          <div class="profile-actions" id="profile-actions"></div>
+        </div>
+      </div>
+
+      <!-- Edit display name panel (own profile) -->
+      <div id="edit-panel" class="post-compose" style="display:none">
+        <form id="edit-form">
+          <label style="font-weight:600;margin-bottom:8px;display:block">Tên hiển thị</label>
+          <input type="text" id="edit-display-name" maxlength="100" placeholder="Tên hiển thị của bạn" />
+          <div class="post-compose-footer" style="margin-top:12px">
+            <button type="button" id="cancel-edit" style="background:transparent;color:#6b7280;width:auto;padding:8px 16px">Hủy</button>
+            <button type="submit" style="width:auto;padding:8px 20px">Lưu</button>
+          </div>
+        </form>
+      </div>
+
+
+      <!-- User posts -->
+      <h3 style="margin:24px 0 12px;font-size:1rem;color:#6b7280">Bài đăng</h3>
+      <div id="user-posts"></div>
+
+    </div>
+  </main>
+
+  <script type="module" src="js/profile.js"></script>
+</body>
+</html>

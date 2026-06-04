@@ -19,10 +19,13 @@ class FeedService:
                 id=r["id"],
                 user_id=r["user_id"],
                 username=r["username"],
+                display_name=r["display_name"],
+                avatar_url=r["avatar_url"],
                 content=r["content"],
                 created_at=r["created_at"],
                 like_count=r["like_count"],
                 comment_count=r["comment_count"],
+                user_liked=r["user_liked"],
             )
             for r in rows
         ]
