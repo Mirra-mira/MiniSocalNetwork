@@ -134,24 +134,22 @@ class SocialRepository:
             p.id,
             p.user_id,
             u.username,
+            u.display_name,
+            u.avatar_url,
             p.content,
             p.created_at,
-            COALESCE(lk.like_count, 0)    AS like_count,
-            COALESCE(cm.comment_count, 0)  AS comment_count
+            COALESCE(lk.like_count, 0)   AS like_count,
+            COALESCE(cm.comment_count, 0) AS comment_count,
+            CASE WHEN ul.user_id IS NOT NULL THEN true ELSE false END AS user_liked
         FROM posts p
-        JOIN follows f ON f.followee_id = p.user_id
-        JOIN users  u ON u.id = p.user_id
+        JOIN users u ON u.id = p.user_id
         LEFT JOIN (
-            SELECT post_id, COUNT(*) AS like_count
-            FROM likes
-            GROUP BY post_id
+            SELECT post_id, COUNT(*) AS like_count FROM likes GROUP BY post_id
         ) lk ON lk.post_id = p.id
         LEFT JOIN (
-            SELECT post_id, COUNT(*) AS comment_count
-            FROM comments
-            GROUP BY post_id
+            SELECT post_id, COUNT(*) AS comment_count FROM comments GROUP BY post_id
         ) cm ON cm.post_id = p.id
-        WHERE f.follower_id = $1
+        LEFT JOIN likes ul ON ul.post_id = p.id AND ul.user_id = $1
         ORDER BY p.created_at DESC
         LIMIT $2 OFFSET $3
         """
